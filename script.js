@@ -5,38 +5,27 @@ let winner = "";
 let userWins = 0;
 let computerWins = 0;
 
-const rockButton = document.getElementById("rock");
-const paperButton = document.getElementById("paper");
-const scissorsButton = document.getElementById("scissors");
+const choices = document.querySelectorAll(".choice");
 
-const userChoiceText = document.getElementById("userChoice");
-const computerChoiceText = document.getElementById("computerChoice");
-const winnerText = document.getElementById("winner");
-const playAgainButton = document.getElementById("playAgain");
+const userChoiceText = document.querySelector("#userChoice");
+const computerChoiceText = document.querySelector("#computerChoice");
+const winnerText = document.querySelector("#winner");
+const playAgainButton = document.querySelector("#playAgain");
 
 updateOutput();
 
-rockButton.onclick = function () {
-  userChoice = "rock";
-  getComputerChoice();
-  playRound();
-  updateOutput();
-};
-paperButton.onclick = function () {
-  userChoice = "paper";
-  getComputerChoice();
-  playRound();
-  updateOutput();
-};
-scissorsButton.onclick = function () {
-  userChoice = "scissors";
-  getComputerChoice();
-  playRound();
-  updateOutput();
-};
-playAgainButton.onclick = function () {
+choices.forEach((button) => {
+  button.addEventListener("click", function () {
+    userChoice = button.getAttribute("id");
+    getComputerChoice();
+    playRound();
+    updateOutput();
+  });
+});
+
+playAgainButton.addEventListener("click", function () {
   restartRound();
-};
+});
 
 function playRound() {
   if (userChoice === computerChoice) {
